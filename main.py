@@ -39,32 +39,21 @@ def special(char_name, char_class):
         return (f'{char_name} применил специальное '
                 f'умение «Защита {10 + 30}»')
 
-
-def start_training(char_name, char_class):
-    """Выбор игрока."""
-    if char_class == 'warrior':
-        print(f'{char_name}, ты Воитель — '
-              f'отличный боец ближнего боя.')
-    if char_class == 'mage':
-        print(f'{char_name}, ты Маг — '
-              f'превосходный укротитель стихий.')
-    if char_class == 'healer':
-        print(f'{char_name}, ты Лекарь — чародей, '
-              f'способный исцелять раны.')
+    
+def start_training(character):
     print('Потренируйся управлять своими навыками.')
-    print('Введи одну из команд: attack — чтобы атаковать'
-          'противника, defence — чтобы блокировать атаку противника '
-          'или special — чтобы использовать свою суперсилу.')
+    print('Введи одну из команд: attack — чтобы атаковать противника, '
+          'defence — чтобы блокировать атаку противника или '
+          'special — чтобы использовать свою суперсилу.')
     print('Если не хочешь тренироваться, введи команду skip.')
     cmd = None
     while cmd != 'skip':
         cmd = input('Введи команду: ')
-        if cmd == 'attack':
-            print(attack(char_name, char_class))
-        if cmd == 'defence':
-            print(defence(char_name, char_class))
-        if cmd == 'special':
-            print(special(char_name, char_class))
+        commands = {'attack': {character.attack},
+                   'defence': {character.defence},
+                   'special': {character.special}}
+        if cmd in commands:
+            print(commands[cmd])
     return 'Тренировка окончена.'
 
 
